@@ -1,0 +1,122 @@
+.header {
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) var(--space-6);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.menu-button {
+  background: transparent;
+  border: none;
+  color: var(--color-gray-700);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-button:hover {
+  background-color: var(--color-gray-100);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-700);
+  font-weight: 500;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  color: var(--color-gray-700);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.logout-button:hover {
+  background-color: var(--color-gray-100);
+  color: var(--color-error);
+}
+
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.login-link {
+  color: var(--color-gray-700);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-3);
+}
+
+.login-link:hover {
+  color: var(--color-primary);
+}
+
+.register-link {
+  padding: var(--space-2) var(--space-4);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header-container {
+    padding: var(--space-3) var(--space-4);
+  }
+  
+  .logout-text {
+    display: none;
+  }
+  
+  .user-info span {
+    display: none;
+  }
+}
