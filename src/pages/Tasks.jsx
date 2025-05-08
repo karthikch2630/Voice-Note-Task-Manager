@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 import { FiSearch, FiPlusCircle, FiEdit2, FiCheck, FiTrash2, FiFilter } from 'react-icons/fi';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
@@ -28,7 +28,7 @@ const Tasks = () => {
   const fetchTasks = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/tasks');
+      const res = await axiosInstance.get('/tasks');
       setTasks(res.data.data);
       setLoading(false);
     } catch (error) {
@@ -41,7 +41,7 @@ const Tasks = () => {
   // Toggle task completion status
   const toggleTaskStatus = async (id, currentStatus) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/tasks/${id}/toggle`);
+      const res = await axiosInstance.put(`/tasks/${id}/toggle`);
       // Update task in state
       setTasks(tasks.map(task => 
         task._id === id ? res.data.data : task
@@ -57,7 +57,7 @@ const Tasks = () => {
   const deleteTask = async (id) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+        await axiosInstance.delete(`/tasks/${id}`);
         setTasks(tasks.filter(task => task._id !== id));
         toast.success('Task deleted successfully');
       } catch (error) {
@@ -132,7 +132,7 @@ const Tasks = () => {
     }
     
     try {
-      const res = await axios.post('http://localhost:5000/api/tasks', formData);
+      const res = await axiosInstance.post('/tasks', formData);
       setTasks([res.data.data, ...tasks]);
       setFormData({
         title: '',

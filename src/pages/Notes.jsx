@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 import { FiSearch, FiPlusCircle, FiEdit2, FiTrash2 } from 'react-icons/fi';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
@@ -23,7 +23,7 @@ const Notes = () => {
   const fetchNotes = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/notes');
+      const res = await axiosInstance.get('/notes');
       setNotes(res.data.data);
       setLoading(false);
     } catch (error) {
@@ -37,7 +37,7 @@ const Notes = () => {
   const deleteNote = async (id) => {
     if (window.confirm('Are you sure you want to delete this note?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/notes/${id}`);
+        await axiosInstance.delete(`/notes/${id}`);
         setNotes(notes.filter(note => note._id !== id));
         toast.success('Note deleted successfully');
       } catch (error) {
@@ -80,7 +80,7 @@ const Notes = () => {
     }
     
     try {
-      const res = await axios.post('http://localhost:5000/api/notes', formData);
+      const res = await axiosInstance.post('/notes', formData);
       setNotes([res.data.data, ...notes]);
       setFormData({
         title: '',

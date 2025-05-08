@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 import { FiArrowLeft, FiSave, FiTrash2, FiCheck } from 'react-icons/fi';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
@@ -25,7 +25,7 @@ const TaskDetail = () => {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/tasks/${id}`);
+        const res = await axiosInstance.get(`/tasks/${id}`);
         setTask(res.data.data);
         
         // Format date for input field
@@ -107,7 +107,7 @@ const TaskDetail = () => {
     }
     
     try {
-      await axios.put(`http://localhost:5000/api/tasks/${id}`, formData);
+      await axiosInstance.put(`/tasks/${id}`, formData);
       toast.success('Task updated successfully');
       navigate('/tasks');
     } catch (error) {
@@ -128,7 +128,7 @@ const TaskDetail = () => {
   const deleteTask = async () => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+        await axiosInstance.delete(`/tasks/${id}`);
         toast.success('Task deleted successfully');
         navigate('/tasks');
       } catch (error) {
